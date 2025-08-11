@@ -45,7 +45,6 @@ public class ParticleSystemClient implements ClientModInitializer {
 						.render(ActionCallPosition.PRE, (particle, tickProgress) -> {
 							double delta = ((double) particle.getAge() + tickProgress) / particle.getMaxAge();
 							Vec3d lerpedPos = particle.getStartPos().lerp(player.getPos(), delta);
-
 							particle.setPos(lerpedPos);
 
 							return false;
