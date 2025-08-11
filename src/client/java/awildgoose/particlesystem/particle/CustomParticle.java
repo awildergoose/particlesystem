@@ -2,6 +2,8 @@ package awildgoose.particlesystem.particle;
 
 import awildgoose.particlesystem.action.Action;
 import awildgoose.particlesystem.action.ActionCallPosition;
+import awildgoose.particlesystem.animated.AnimatedFloat;
+import awildgoose.particlesystem.animated.Easing;
 import awildgoose.particlesystem.provider.CustomParticleData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -27,7 +29,9 @@ public class CustomParticle extends AnimatedParticle {
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
         this.startPos = this.getPos();
+
         this.setData(CustomParticleData.DEFAULT);
+        this.data.gravity = new AnimatedFloat(Easing.LINEAR, 1.0f);
     }
 
     public int getAge() {
@@ -70,6 +74,7 @@ public class CustomParticle extends AnimatedParticle {
 
     private void applyData(float tickProgress) {
         this.scale = this.data.size.getValue(tickProgress);
+        this.gravityStrength = this.data.gravity.getValue(tickProgress);
         this.maxAge = this.data.lifetime;
         this.setColor(this.data.color.getValue(tickProgress).getRGB());
         this.updateSprite();
@@ -94,8 +99,12 @@ public class CustomParticle extends AnimatedParticle {
 
     @Override
     public void move(double dx, double dy, double dz) {
-        this.setBoundingBox(this.getBoundingBox().offset(dx, dy, dz));
-        this.repositionFromBoundingBox();
+        if (this.data.noClip) {
+            this.setBoundingBox(this.getBoundingBox().offset(dx, dy, dz));
+            this.repositionFromBoundingBox();
+        } else {
+            super.move(dx, dy, dz);
+        }
     }
 
     @Override

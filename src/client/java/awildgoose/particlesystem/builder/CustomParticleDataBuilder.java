@@ -18,11 +18,13 @@ public class CustomParticleDataBuilder {
     private AnimatedFloat size = AnimatedFloat.ONE;
     private AnimatedFloat angle = AnimatedFloat.ZERO;
     private AnimatedColor color = AnimatedColor.WHITE;
+    private AnimatedFloat gravity = AnimatedFloat.ZERO;
     private CustomParticleTexture texture = CustomParticleTexture.WISP;
     private int lifetime = 20;
-    private double velocityX;
-    private double velocityY;
-    private double velocityZ;
+    private double velocityX = 0;
+    private double velocityY = 0;
+    private double velocityZ = 0;
+    private boolean noClip = true;
     private final ArrayList<Action> renderActions = new ArrayList<>();
     private final ArrayList<Action> tickActions = new ArrayList<>();
 
@@ -73,6 +75,21 @@ public class CustomParticleDataBuilder {
         return this;
     }
 
+    public CustomParticleDataBuilder gravity(AnimatedFloat gravity) {
+        this.gravity = gravity;
+        return this;
+    }
+
+    public CustomParticleDataBuilder noClip() {
+        this.noClip = true;
+        return this;
+    }
+
+    public CustomParticleDataBuilder clip() {
+        this.noClip = false;
+        return this;
+    }
+
     public CustomParticleDataBuilder render(ActionCallPosition position, BiFunction<CustomParticle, Float, Boolean> function) {
         this.renderActions.add(new Action() {
             @Override
@@ -118,6 +135,6 @@ public class CustomParticleDataBuilder {
     }
 
     public CustomParticleData build() {
-        return new CustomParticleData(size, lifetime, texture, angle, color, velocityX, velocityY, velocityZ, tickActions, renderActions);
+        return new CustomParticleData(size, lifetime, texture, angle, color, velocityX, velocityY, velocityZ, gravity, noClip, tickActions, renderActions);
     }
 }

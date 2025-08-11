@@ -47,9 +47,7 @@ public class CustomParticleBuilder {
         );
 
         if (particle != null) {
-            particle.setData(
-                    this.data
-            );
+            particle.setData(this.data);
         } else {
             ParticleSystem.LOGGER.error("Failed to spawn custom particle!");
         }
