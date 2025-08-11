@@ -13,6 +13,7 @@ public class CustomParticleData {
 
     public AnimatedValue<Float> size;
     public AnimatedValue<Float> angle;
+    public AnimatedValue<Float> gravity;
     public AnimatedValue<Color> color;
     public CustomParticleTexture texture;
     public int lifetime;
@@ -20,7 +21,6 @@ public class CustomParticleData {
     public double velocityX;
     public double velocityY;
     public double velocityZ;
-    public AnimatedValue<Float> gravity;
     public boolean noClip;
 
     public ArrayList<Action> tickActions;
@@ -45,6 +45,7 @@ public class CustomParticleData {
         this.size.tick();
         this.angle.tick();
         this.color.tick();
+        this.gravity.tick();
     }
 
     public CustomParticleData copy() {
