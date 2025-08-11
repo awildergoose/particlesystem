@@ -3,10 +3,7 @@ package awildgoose.particlesystem.particle;
 import awildgoose.particlesystem.provider.CustomParticleData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.AnimatedParticle;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
@@ -36,6 +33,14 @@ public class CustomParticle extends AnimatedParticle {
         this.scale = this.data.size.getValue(tickProgress);
         this.maxAge = this.data.lifetime;
         this.updateSprite();
+    }
+
+    @Override
+    public BillboardParticle.Rotator getRotator() {
+        return (quaternion, camera, tickProgress) -> {
+            quaternion.set(camera.getRotation());
+            quaternion.rotateZ(this.data.angle.getValue(tickProgress));
+        };
     }
 
     @Override

@@ -1,21 +1,19 @@
 package awildgoose.particlesystem.builder;
 
 import awildgoose.particlesystem.animated.AnimatedFloat;
+import awildgoose.particlesystem.animated.AnimatedNumber;
 import awildgoose.particlesystem.provider.CustomParticleData;
 import awildgoose.particlesystem.provider.CustomParticleTexture;
 
 @SuppressWarnings("unused")
 public class CustomParticleDataBuilder {
     private AnimatedFloat size = AnimatedFloat.ONE;
+    private AnimatedFloat angle = AnimatedFloat.ZERO;
     private CustomParticleTexture texture = CustomParticleTexture.WISP;
     private int lifetime = 20;
 
     public CustomParticleDataBuilder size(AnimatedFloat size) {
-        if (size.getLifetime() <= 0) {
-            size.setLifetime(this.lifetime);
-        }
-
-        this.size = size;
+        this.size = resolveAnimatedNumber(size);
         return this;
     }
 
@@ -29,7 +27,20 @@ public class CustomParticleDataBuilder {
         return this;
     }
 
+    public CustomParticleDataBuilder angle(AnimatedFloat angle) {
+        this.angle = resolveAnimatedNumber(angle);
+        return this;
+    }
+
+    private <T extends AnimatedNumber<?>> T resolveAnimatedNumber(T number) {
+        if (number.getLifetime() <= 0) {
+            number.setLifetime(this.lifetime);
+        }
+
+        return number;
+    }
+
     public CustomParticleData build() {
-        return new CustomParticleData(size, lifetime, texture);
+        return new CustomParticleData(size, lifetime, texture, angle);
     }
 }

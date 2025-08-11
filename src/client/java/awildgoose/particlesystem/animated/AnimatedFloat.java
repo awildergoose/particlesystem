@@ -2,6 +2,7 @@ package awildgoose.particlesystem.animated;
 
 @SuppressWarnings("unused")
 public class AnimatedFloat extends AnimatedNumber<Float> {
+    public static final AnimatedFloat ZERO = new AnimatedFloat(Easing.LINEAR, 0.0);
     public static final AnimatedFloat ONE = new AnimatedFloat(Easing.LINEAR, 1.0);
 
     public AnimatedFloat(Easing easing, double... values) {

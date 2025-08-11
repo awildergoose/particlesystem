@@ -22,6 +22,7 @@ public class ParticleSystemClient implements ClientModInitializer {
 				.with(
 						new CustomParticleDataBuilder()
 						.lifetime(40)
+						.angle(new AnimatedFloat(Easing.QUINT_IN_OUT, 0.0f, 360.0f))
 						.size(new AnimatedFloat(Easing.QUINT_IN_OUT, 0.0f, 0.5f, 0.5f, 0.0f))
 						.texture(CustomParticleTexture.TWINKLE)
 						.build()
