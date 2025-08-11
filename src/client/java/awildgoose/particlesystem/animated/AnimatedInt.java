@@ -1,0 +1,15 @@
+package awildgoose.particlesystem.animated;
+
+@SuppressWarnings("unused")
+public class AnimatedInt extends AnimatedNumber<Integer> {
+    public static final AnimatedInt ONE = new AnimatedInt(Easing.LINEAR, 1.0);
+
+    public AnimatedInt(Easing easing, double... values) {
+        super(easing, values);
+    }
+
+    @Override
+    public Integer getValue(float partialTicks) {
+        return (int) Math.round(interpolateValue(partialTicks));
+    }
+}

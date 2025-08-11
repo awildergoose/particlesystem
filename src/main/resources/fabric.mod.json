@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "particlesystem",
+	"version": "${version}",
+	"name": "Particle System",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"awildergoose"
+	],
+	"contact": {
+		"sources": "https://github.com/awildergoose/particlesystem",
+		"issues": "https://github.com/awildergoose/particlesystem/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/particlesystem/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"awildgoose.particlesystem.ParticleSystem"
+		],
+		"client": [
+			"awildgoose.particlesystem.ParticleSystemClient"
+		]
+	},
+	"mixins": [
+		"particlesystem.mixins.json",
+		{
+			"config": "particlesystem.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.17.1",
+		"minecraft": "~1.21.8",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
