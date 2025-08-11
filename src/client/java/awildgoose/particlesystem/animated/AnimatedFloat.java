@@ -13,4 +13,12 @@ public class AnimatedFloat extends AnimatedNumber<Float> {
     public Float getValue(float partialTicks) {
         return (float) interpolateValue(partialTicks);
     }
+
+    @Override
+    public AnimatedValue<Float> copy() {
+        double[] valuesCopy = values.clone();
+        AnimatedValue<Float> copyInstance = new AnimatedFloat(easing, valuesCopy);
+        copyInstance.setLifetime(getLifetime());
+        return copyInstance;
+    }
 }

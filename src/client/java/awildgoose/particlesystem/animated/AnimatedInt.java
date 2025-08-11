@@ -12,4 +12,12 @@ public class AnimatedInt extends AnimatedNumber<Integer> {
     public Integer getValue(float partialTicks) {
         return (int) Math.round(interpolateValue(partialTicks));
     }
+
+    @Override
+    public AnimatedValue<Integer> copy() {
+        double[] valuesCopy = values.clone();
+        AnimatedValue<Integer> copyInstance = new AnimatedInt(easing, valuesCopy);
+        copyInstance.setLifetime(getLifetime());
+        return copyInstance;
+    }
 }

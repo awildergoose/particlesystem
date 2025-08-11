@@ -6,4 +6,6 @@ public interface AnimatedValue<T> {
 
     int getLifetime();
     void setLifetime(int lifetime);
+
+    AnimatedValue<T> copy();
 }

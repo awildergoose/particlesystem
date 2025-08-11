@@ -63,4 +63,12 @@ public class AnimatedColor implements AnimatedValue<Color> {
 
         return new Color(r, g, b, a);
     }
+
+    @Override
+    public AnimatedValue<Color> copy() {
+        Color[] valuesCopy = colors.clone();
+        AnimatedValue<Color> copyInstance = new AnimatedColor(easing, valuesCopy);
+        copyInstance.setLifetime(getLifetime());
+        return copyInstance;
+    }
 }

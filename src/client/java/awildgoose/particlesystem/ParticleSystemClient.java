@@ -9,7 +9,9 @@ import awildgoose.particlesystem.builder.CustomParticleBuilder;
 import awildgoose.particlesystem.particle.CustomParticle;
 import awildgoose.particlesystem.builder.CustomParticleDataBuilder;
 import awildgoose.particlesystem.provider.CustomParticleTexture;
+import awildgoose.particlesystem.provider.Scheduler;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.event.client.player.ClientPlayerBlockBreakEvents;
 
@@ -21,6 +23,7 @@ public class ParticleSystemClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		ParticleFactoryRegistry.getInstance().register(
 				ParticleSystem.CUSTOM_PARTICLE, CustomParticle.Factory::new);
+		ClientTickEvents.END_WORLD_TICK.register(Scheduler::tick);
 
 		//noinspection CommentedOutCode
 		ClientPlayerBlockBreakEvents.AFTER.register((world, player, pos, state) -> new CustomParticleBuilder()
@@ -36,7 +39,6 @@ public class ParticleSystemClient implements ClientModInitializer {
 						), 20)
 						.color(new AnimatedColor(
 								Easing.EXPO_IN_OUT,
-								new Color(255, 255, 255, 0),
 								Color.BLUE,
 								Color.WHITE,
 								Color.BLUE,
@@ -49,13 +51,13 @@ public class ParticleSystemClient implements ClientModInitializer {
 //							particle.setPos(lerpedPos);
 							return false;
 						})
-						.disableNoClip()
+						.enableNoClip()
 						.texture(CustomParticleTexture.TWINKLE)
 						.gravity(new AnimatedFloat(
 								Easing.EXPO_IN_OUT,
 								0.2f
 						))
 						.build()
-				).spawn());
+				).createCircle(32, 2));
 	}
 }
