@@ -58,6 +58,6 @@ public class ParticleSystemClient implements ClientModInitializer {
 								0.2f
 						))
 						.build()
-				).after(80).createCircle(32, 2));
+				).after(40).createCircle(32, 2));
 	}
 }
