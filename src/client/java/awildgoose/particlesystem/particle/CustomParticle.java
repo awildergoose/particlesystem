@@ -14,6 +14,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.Vec3d;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -76,7 +77,9 @@ public class CustomParticle extends AnimatedParticle {
         this.scale = this.data.size.getValue(tickProgress);
         this.gravityStrength = this.data.gravity.getValue(tickProgress);
         this.maxAge = this.data.lifetime;
-        this.setColor(this.data.color.getValue(tickProgress).getRGB());
+        Color finalColor = this.data.color.getValue(tickProgress);
+        this.setColor(finalColor.getRGB());
+        this.setAlpha((float) finalColor.getAlpha() / 255);
         this.updateSprite();
     }
 

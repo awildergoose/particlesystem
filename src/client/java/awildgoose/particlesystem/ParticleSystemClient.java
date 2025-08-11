@@ -36,10 +36,11 @@ public class ParticleSystemClient implements ClientModInitializer {
 						), 20)
 						.color(new AnimatedColor(
 								Easing.EXPO_IN_OUT,
+								new Color(255, 255, 255, 0),
 								Color.BLUE,
 								Color.WHITE,
 								Color.BLUE,
-								Color.WHITE
+								new Color(255, 255, 255, 0)
 						), 20)
 						.size(new AnimatedFloat(Easing.EXPO_IN_OUT, 0.0f, 0.5f, 0.5f, 0.0f))
 						.render(ActionCallPosition.PRE, (particle, tickProgress) -> {
@@ -48,7 +49,7 @@ public class ParticleSystemClient implements ClientModInitializer {
 //							particle.setPos(lerpedPos);
 							return false;
 						})
-						.clip()
+						.disableNoClip()
 						.texture(CustomParticleTexture.TWINKLE)
 						.gravity(new AnimatedFloat(
 								Easing.EXPO_IN_OUT,

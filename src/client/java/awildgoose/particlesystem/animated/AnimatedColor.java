@@ -59,6 +59,8 @@ public class AnimatedColor implements AnimatedValue<Color> {
         int g = (int) (from.getGreen() + (to.getGreen() - from.getGreen()) * eased);
         int b = (int) (from.getBlue() + (to.getBlue() - from.getBlue()) * eased);
 
-        return new Color(r, g, b);
+        int a = (int) (from.getAlpha() + (to.getAlpha() - from.getAlpha()) * eased);
+
+        return new Color(r, g, b, a);
     }
 }

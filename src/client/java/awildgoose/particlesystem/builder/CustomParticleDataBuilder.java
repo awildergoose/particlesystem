@@ -80,12 +80,12 @@ public class CustomParticleDataBuilder {
         return this;
     }
 
-    public CustomParticleDataBuilder noClip() {
+    public CustomParticleDataBuilder enableNoClip() {
         this.noClip = true;
         return this;
     }
 
-    public CustomParticleDataBuilder clip() {
+    public CustomParticleDataBuilder disableNoClip() {
         this.noClip = false;
         return this;
     }
