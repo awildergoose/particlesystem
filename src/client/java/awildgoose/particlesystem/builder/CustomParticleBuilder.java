@@ -100,11 +100,22 @@ public class CustomParticleBuilder {
             double x = centerX + radius * Math.cos(angle);
             double z = centerZ + radius * Math.sin(angle);
 
-            this.at(x, centerY, z).spawn(action);
+            CustomParticleBuilder copyBuilder = this.copy().at(x, centerY, z);
+            copyBuilder.spawn(action);
         }
     }
 
     public void createCircle(int points, double radius) {
         this.createCircle(points, radius, null);
+    }
+
+    public CustomParticleBuilder copy() {
+        CustomParticleBuilder copy = new CustomParticleBuilder();
+        copy.data = this.data;
+        copy.x = this.x;
+        copy.y = this.y;
+        copy.z = this.z;
+        copy.spawnDelay = this.spawnDelay;
+        return copy;
     }
 }
