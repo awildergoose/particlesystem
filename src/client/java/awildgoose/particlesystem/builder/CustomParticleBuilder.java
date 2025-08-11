@@ -3,6 +3,8 @@ package awildgoose.particlesystem.builder;
 import awildgoose.particlesystem.ParticleSystem;
 import awildgoose.particlesystem.particle.CustomParticle;
 import awildgoose.particlesystem.provider.CustomParticleData;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -35,6 +37,7 @@ public class CustomParticleBuilder {
         return this.at(Vec3d.ofCenter(pos));
     }
 
+    @Environment(EnvType.CLIENT)
     @SuppressWarnings("UnusedReturnValue")
     public CustomParticle spawn() {
         CustomParticle particle = (CustomParticle) MinecraftClient.getInstance().particleManager.addParticle(
