@@ -1,5 +1,6 @@
 package awildgoose.particlesystem;
 
+import awildgoose.particlesystem.animated.AnimatedAngle;
 import awildgoose.particlesystem.animated.AnimatedFloat;
 import awildgoose.particlesystem.animated.Easing;
 import awildgoose.particlesystem.builder.CustomParticleBuilder;
@@ -22,7 +23,11 @@ public class ParticleSystemClient implements ClientModInitializer {
 				.with(
 						new CustomParticleDataBuilder()
 						.lifetime(40)
-						.angle(new AnimatedFloat(Easing.QUINT_IN_OUT, 0.0f, 360.0f))
+						.angle(new AnimatedAngle(
+								Easing.QUINT_IN_OUT,
+								0.0f,
+								360.0f
+						), 20)
 						.size(new AnimatedFloat(Easing.QUINT_IN_OUT, 0.0f, 0.5f, 0.5f, 0.0f))
 						.texture(CustomParticleTexture.TWINKLE)
 						.build()
