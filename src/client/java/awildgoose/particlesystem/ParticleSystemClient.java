@@ -1,5 +1,6 @@
 package awildgoose.particlesystem;
 
+import awildgoose.particlesystem.action.ActionCallPosition;
 import awildgoose.particlesystem.animated.AnimatedAngle;
 import awildgoose.particlesystem.animated.AnimatedColor;
 import awildgoose.particlesystem.animated.AnimatedFloat;
@@ -11,6 +12,7 @@ import awildgoose.particlesystem.provider.CustomParticleTexture;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.event.client.player.ClientPlayerBlockBreakEvents;
+import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 
@@ -40,6 +42,14 @@ public class ParticleSystemClient implements ClientModInitializer {
 								Color.WHITE
 						), 20)
 						.size(new AnimatedFloat(Easing.EXPO_IN_OUT, 0.0f, 0.5f, 0.5f, 0.0f))
+						.render(ActionCallPosition.PRE, (particle, tickProgress) -> {
+							double delta = ((double) particle.getAge() + tickProgress) / particle.getMaxAge();
+							Vec3d lerpedPos = particle.getStartPos().lerp(player.getPos(), delta);
+
+							particle.setPos(lerpedPos);
+
+							return false;
+						})
 						.texture(CustomParticleTexture.TWINKLE)
 						.build()
 				).spawn());

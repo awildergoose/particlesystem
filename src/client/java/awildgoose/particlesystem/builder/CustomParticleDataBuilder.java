@@ -1,11 +1,17 @@
 package awildgoose.particlesystem.builder;
 
+import awildgoose.particlesystem.action.Action;
+import awildgoose.particlesystem.action.ActionCallPosition;
 import awildgoose.particlesystem.animated.AnimatedAngle;
 import awildgoose.particlesystem.animated.AnimatedColor;
 import awildgoose.particlesystem.animated.AnimatedFloat;
 import awildgoose.particlesystem.animated.AnimatedValue;
+import awildgoose.particlesystem.particle.CustomParticle;
 import awildgoose.particlesystem.provider.CustomParticleData;
 import awildgoose.particlesystem.provider.CustomParticleTexture;
+
+import java.util.ArrayList;
+import java.util.function.BiFunction;
 
 @SuppressWarnings("unused")
 public class CustomParticleDataBuilder {
@@ -14,6 +20,11 @@ public class CustomParticleDataBuilder {
     private AnimatedColor color = AnimatedColor.WHITE;
     private CustomParticleTexture texture = CustomParticleTexture.WISP;
     private int lifetime = 20;
+    private double velocityX;
+    private double velocityY;
+    private double velocityZ;
+    private final ArrayList<Action> renderActions = new ArrayList<>();
+    private final ArrayList<Action> tickActions = new ArrayList<>();
 
     public CustomParticleDataBuilder size(AnimatedFloat size) {
         this.size = resolveAnimatedValue(size);
@@ -55,6 +66,45 @@ public class CustomParticleDataBuilder {
         return this;
     }
 
+    public CustomParticleDataBuilder velocity(double x, double y, double z) {
+        this.velocityX = x;
+        this.velocityY = y;
+        this.velocityZ = z;
+        return this;
+    }
+
+    public CustomParticleDataBuilder render(ActionCallPosition position, BiFunction<CustomParticle, Float, Boolean> function) {
+        this.renderActions.add(new Action() {
+            @Override
+            public ActionCallPosition getPosition() {
+                return position;
+            }
+
+            @Override
+            public boolean run(CustomParticle particle, float tickProgress) {
+                return function.apply(particle, tickProgress);
+            }
+        });
+
+        return this;
+    }
+
+    public CustomParticleDataBuilder tick(ActionCallPosition position, BiFunction<CustomParticle, Float, Boolean> function) {
+        this.renderActions.add(new Action() {
+            @Override
+            public ActionCallPosition getPosition() {
+                return position;
+            }
+
+            @Override
+            public boolean run(CustomParticle particle, float tickProgress) {
+                return function.apply(particle, tickProgress);
+            }
+        });
+
+        return this;
+    }
+
     private <T extends AnimatedValue<?>> T resolveAnimatedValue(T number, int duration) {
         if (number.getLifetime() <= 0) {
             number.setLifetime(duration);
@@ -68,6 +118,6 @@ public class CustomParticleDataBuilder {
     }
 
     public CustomParticleData build() {
-        return new CustomParticleData(size, lifetime, texture, angle, color);
+        return new CustomParticleData(size, lifetime, texture, angle, color, velocityX, velocityY, velocityZ, tickActions, renderActions);
     }
 }

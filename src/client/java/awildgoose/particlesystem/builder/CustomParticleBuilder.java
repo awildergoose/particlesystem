@@ -36,7 +36,11 @@ public class CustomParticleBuilder {
     }
 
     public void spawn() {
-        CustomParticle particle = (CustomParticle) MinecraftClient.getInstance().particleManager.addParticle(ParticleSystem.CUSTOM_PARTICLE, this.x, this.y, this.z, 0, 0, 0);
+        CustomParticle particle = (CustomParticle) MinecraftClient.getInstance().particleManager.addParticle(
+                ParticleSystem.CUSTOM_PARTICLE,
+                this.x, this.y, this.z,
+                this.data.velocityX, this.data.velocityY, this.data.velocityZ
+        );
 
         if (particle != null) {
             particle.setData(

@@ -1,5 +1,7 @@
 package awildgoose.particlesystem.particle;
 
+import awildgoose.particlesystem.action.Action;
+import awildgoose.particlesystem.action.ActionCallPosition;
 import awildgoose.particlesystem.provider.CustomParticleData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,19 +10,56 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.util.math.Vec3d;
 
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class CustomParticle extends AnimatedParticle {
     private CustomParticleData data;
+    private final Vec3d startPos;
 
     CustomParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x, y, z, spriteProvider, 0.05F);
+        super(world, x, y, z, spriteProvider, 0F);
         this.velocityX = velocityX;
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
-        this.maxAge = 20;
-        this.scale = 1.0f;
+        this.startPos = this.getPos();
         this.setData(CustomParticleData.DEFAULT);
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+    public Vec3d getPos() {
+        return new Vec3d(this.x, this.y, this.z);
+    }
+    public Vec3d getPrevPos() {
+        return new Vec3d(this.lastX, this.lastY, this.lastZ);
+    }
+    public Vec3d getStartPos() {
+        return this.startPos;
+    }
+
+    public void setPos(Vec3d pos) {
+        this.x = pos.x;
+        this.y = pos.y;
+        this.z = pos.z;
+    }
+
+    public boolean callActions(ArrayList<Action> actions, ActionCallPosition position, float tickProgress) {
+        AtomicBoolean suppress = new AtomicBoolean(false);
+
+        actions.forEach((v) -> {
+            if (v.getPosition() == position)  {
+                if (v.run(this, tickProgress))
+                    suppress.set(true);
+            }
+        });
+
+        return suppress.get();
     }
 
     private void updateSprite() {
@@ -47,7 +86,10 @@ public class CustomParticle extends AnimatedParticle {
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float tickProgress) {
         this.applyData(tickProgress);
-        super.render(vertexConsumer, camera, tickProgress);
+        if (!this.callActions(this.data.renderActions, ActionCallPosition.PRE, tickProgress)) {
+            super.render(vertexConsumer, camera, tickProgress);
+            this.callActions(this.data.renderActions, ActionCallPosition.POST, tickProgress);
+        }
     }
 
     @Override
@@ -59,7 +101,9 @@ public class CustomParticle extends AnimatedParticle {
     @Override
     public void tick() {
         super.tick();
+        this.callActions(this.data.tickActions, ActionCallPosition.PRE, 0);
         this.data.tick();
+        this.callActions(this.data.tickActions, ActionCallPosition.POST, 0);
     }
 
     public void setData(CustomParticleData data) {
