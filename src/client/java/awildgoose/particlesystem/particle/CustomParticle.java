@@ -23,20 +23,25 @@ public class CustomParticle extends AnimatedParticle {
         this.velocityZ = velocityZ;
         this.maxAge = 20;
         this.scale = 1.0f;
-        this.setSpriteForAge(spriteProvider);
         this.setData(CustomParticleData.DEFAULT);
     }
 
+    private void updateSprite() {
+        int totalFrames = 8;
+        int currentFrame = 1 + this.data.texture.asNum();
+        this.setSprite(spriteProvider.getSprite(currentFrame, totalFrames));
+    }
+
     private void applyData(float tickProgress) {
-        this.data.tick();
         this.scale = this.data.size.getValue(tickProgress);
         this.maxAge = this.data.lifetime;
+        this.updateSprite();
     }
 
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float tickProgress) {
-        super.render(vertexConsumer, camera, tickProgress);
         this.applyData(tickProgress);
+        super.render(vertexConsumer, camera, tickProgress);
     }
 
     @Override
@@ -48,6 +53,7 @@ public class CustomParticle extends AnimatedParticle {
     @Override
     public void tick() {
         super.tick();
+        this.data.tick();
     }
 
     public void setData(CustomParticleData data) {

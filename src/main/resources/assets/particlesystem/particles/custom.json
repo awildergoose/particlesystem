@@ -1,5 +1,12 @@
 {
   "textures": [
+    "particlesystem:extruding_spark",
+    "particlesystem:smoke",
+    "particlesystem:spark",
+    "particlesystem:sparkle",
+    "particlesystem:star",
+    "particlesystem:thin_extruding_spark",
+    "particlesystem:twinkle",
     "particlesystem:wisp"
   ]
 }

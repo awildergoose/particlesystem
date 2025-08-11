@@ -5,6 +5,7 @@ import awildgoose.particlesystem.animated.Easing;
 import awildgoose.particlesystem.builder.CustomParticleBuilder;
 import awildgoose.particlesystem.particle.CustomParticle;
 import awildgoose.particlesystem.builder.CustomParticleDataBuilder;
+import awildgoose.particlesystem.provider.CustomParticleTexture;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.event.client.player.ClientPlayerBlockBreakEvents;
@@ -20,8 +21,9 @@ public class ParticleSystemClient implements ClientModInitializer {
 				.at(pos)
 				.with(
 						new CustomParticleDataBuilder()
-						.lifetime(120)
-						.size(new AnimatedFloat(Easing.SINE_IN_OUT, 0.0f, 0.5f, 0.5f, 0.5f, 0.0f))
+						.lifetime(40)
+						.size(new AnimatedFloat(Easing.QUINT_IN_OUT, 0.0f, 0.5f, 0.5f, 0.0f))
+						.texture(CustomParticleTexture.TWINKLE)
 						.build()
 				).spawn());
 	}
