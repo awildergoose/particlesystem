@@ -35,7 +35,8 @@ public class CustomParticleBuilder {
         return this.at(Vec3d.ofCenter(pos));
     }
 
-    public void spawn() {
+    @SuppressWarnings("UnusedReturnValue")
+    public CustomParticle spawn() {
         CustomParticle particle = (CustomParticle) MinecraftClient.getInstance().particleManager.addParticle(
                 ParticleSystem.CUSTOM_PARTICLE,
                 this.x, this.y, this.z,
@@ -49,5 +50,7 @@ public class CustomParticleBuilder {
         } else {
             ParticleSystem.LOGGER.error("Failed to spawn custom particle!");
         }
+
+        return particle;
     }
 }
