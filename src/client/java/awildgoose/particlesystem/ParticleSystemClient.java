@@ -1,6 +1,7 @@
 package awildgoose.particlesystem;
 
 import awildgoose.particlesystem.animated.AnimatedAngle;
+import awildgoose.particlesystem.animated.AnimatedColor;
 import awildgoose.particlesystem.animated.AnimatedFloat;
 import awildgoose.particlesystem.animated.Easing;
 import awildgoose.particlesystem.builder.CustomParticleBuilder;
@@ -10,6 +11,8 @@ import awildgoose.particlesystem.provider.CustomParticleTexture;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.event.client.player.ClientPlayerBlockBreakEvents;
+
+import java.awt.*;
 
 @SuppressWarnings("unused")
 public class ParticleSystemClient implements ClientModInitializer {
@@ -24,11 +27,19 @@ public class ParticleSystemClient implements ClientModInitializer {
 						new CustomParticleDataBuilder()
 						.lifetime(40)
 						.angle(new AnimatedAngle(
-								Easing.QUINT_IN_OUT,
+								Easing.EXPO_IN_OUT,
+								0.0f,
 								0.0f,
 								360.0f
 						), 20)
-						.size(new AnimatedFloat(Easing.QUINT_IN_OUT, 0.0f, 0.5f, 0.5f, 0.0f))
+						.color(new AnimatedColor(
+								Easing.EXPO_IN_OUT,
+								Color.BLUE,
+								Color.WHITE,
+								Color.BLUE,
+								Color.WHITE
+						), 20)
+						.size(new AnimatedFloat(Easing.EXPO_IN_OUT, 0.0f, 0.5f, 0.5f, 0.0f))
 						.texture(CustomParticleTexture.TWINKLE)
 						.build()
 				).spawn());

@@ -32,6 +32,7 @@ public class CustomParticle extends AnimatedParticle {
     private void applyData(float tickProgress) {
         this.scale = this.data.size.getValue(tickProgress);
         this.maxAge = this.data.lifetime;
+        this.setColor(this.data.color.getValue(tickProgress).getRGB());
         this.updateSprite();
     }
 
