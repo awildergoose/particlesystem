@@ -64,11 +64,10 @@ public class AnimatedColor implements AnimatedValue<Color> {
         Color from = colors[segIndex];
         Color to = colors[segIndex + 1];
 
-        int r = (int) (from.getRed() + (to.getRed() - from.getRed()) * eased);
-        int g = (int) (from.getGreen() + (to.getGreen() - from.getGreen()) * eased);
-        int b = (int) (from.getBlue() + (to.getBlue() - from.getBlue()) * eased);
-
-        int a = (int) (from.getAlpha() + (to.getAlpha() - from.getAlpha()) * eased);
+        int r = Math.clamp((int)(from.getRed() + (to.getRed() - from.getRed()) * eased), 0, 255);
+        int g = Math.clamp((int)(from.getGreen() + (to.getGreen() - from.getGreen()) * eased), 0, 255);
+        int b = Math.clamp((int)(from.getBlue() + (to.getBlue() - from.getBlue()) * eased), 0, 255);
+        int a = Math.clamp((int)(from.getAlpha() + (to.getAlpha() - from.getAlpha()) * eased), 0, 255);
 
         return new Color(r, g, b, a);
     }
@@ -79,5 +78,9 @@ public class AnimatedColor implements AnimatedValue<Color> {
         AnimatedValue<Color> copyInstance = new AnimatedColor(easing, valuesCopy);
         copyInstance.setLifetime(getLifetime());
         return copyInstance;
+    }
+
+    public static AnimatedValue<Color> of(Color val) {
+        return new AnimatedColor(Easing.LINEAR, val);
     }
 }

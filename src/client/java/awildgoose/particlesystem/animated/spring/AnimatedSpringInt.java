@@ -23,4 +23,8 @@ public class AnimatedSpringInt extends AnimatedSpringNumber<Integer> {
         copy.setLifetime(getLifetime());
         return copy;
     }
+
+    public static AnimatedValue<Integer> of(Integer val) {
+        return new AnimatedSpringInt(0.8, 4.0, val);
+    }
 }

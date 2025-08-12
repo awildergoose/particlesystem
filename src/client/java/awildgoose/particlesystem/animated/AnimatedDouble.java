@@ -25,4 +25,8 @@ public class AnimatedDouble extends AnimatedNumber<Double> {
         copyInstance.setLifetime(getLifetime());
         return copyInstance;
     }
+
+    public static AnimatedValue<Double> of(Double val) {
+        return new AnimatedDouble(Easing.LINEAR, val);
+    }
 }

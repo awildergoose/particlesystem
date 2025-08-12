@@ -76,4 +76,8 @@ public class AnimatedSpringColor implements AnimatedValue<Color> {
         copy.setLifetime(getLifetime());
         return copy;
     }
+
+    public static AnimatedValue<Color> of(Color val) {
+        return new AnimatedSpringColor(0.8, 4.0, val);
+    }
 }

@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class CustomParticle extends AnimatedParticle {
     private CustomParticleData data;
     private final Vec3d startPos;
-    private int lastSpriteIndex = -1;
     public int frameCount = 8;
 
     CustomParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
@@ -68,11 +67,7 @@ public class CustomParticle extends AnimatedParticle {
     }
 
     private void updateSprite() {
-        int spriteIndex = 1 + this.data.texture;
-        if (spriteIndex != lastSpriteIndex) {
-            this.setSprite(spriteProvider.getSprite(spriteIndex, this.frameCount));
-            lastSpriteIndex = spriteIndex;
-        }
+        this.setSprite(spriteProvider.getSprite(1 + this.data.texture, this.frameCount));
     }
 
     private void applyData(float tickProgress) {

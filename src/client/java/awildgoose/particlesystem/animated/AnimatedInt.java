@@ -25,4 +25,8 @@ public class AnimatedInt extends AnimatedNumber<Integer> {
         copyInstance.setLifetime(getLifetime());
         return copyInstance;
     }
+
+    public static AnimatedValue<Integer> of(Integer val) {
+        return new AnimatedInt(Easing.LINEAR, val);
+    }
 }

@@ -26,49 +26,51 @@ public class ParticleSystemClient implements ClientModInitializer {
 				ParticleSystem.CUSTOM_PARTICLE, CustomParticle.Factory::new);
 		ClientTickEvents.END_WORLD_TICK.register(Scheduler::tick);
 
-		//noinspection CommentedOutCode
-		ClientPlayerBlockBreakEvents.AFTER.register((world, player, pos, state) -> new CustomParticleBuilder()
-				.at(pos)
-				.with(
-						new CustomParticleDataBuilder()
-						.lifetime(200)
-						.angle(new AnimatedSpringAngle(
-								1.0f,
-								1.0f,
-								0.0f,
-								360.0f,
-								0.0f,
-								360.0f,
-								0.0f,
-								360.0f
-						))
-						.color(new AnimatedSpringColor(
-								1.0f,
-								1.0f,
-								Color.BLUE,
-								Color.RED,
-								Color.GREEN,
-								new Color(255, 255, 255, 0)
-						))
-						.size(new AnimatedSpringFloat(1.0f,
-								1.0f,
-								0.0f,
-								0.5f,
-								0.5f,
-								0.0f))
-						.render(ActionCallPosition.PRE, (particle, tickProgress) -> {
-//							double delta = ((double) particle.getAge() + tickProgress) / particle.getMaxAge();
-//							Vec3d lerpedPos = particle.getStartPos().lerp(player.getPos(), delta);
-//							particle.setPos(lerpedPos);
-							return false;
-						})
-						.disableNoClip()
-						.texture(CustomParticleTexture.TWINKLE)
-						.gravity(new AnimatedFloat(
-								Easing.EXPO_IN_OUT,
-								0.2f
-						))
-						.build()
-				).after(40).createCircle(32, 2));
+		ClientPlayerBlockBreakEvents.AFTER.register((world, player, pos, state) -> {
+			//noinspection CommentedOutCode
+			new CustomParticleBuilder()
+					.at(pos)
+					.with(
+							new CustomParticleDataBuilder()
+									.lifetime(800)
+									.angle(new AnimatedSpringAngle(
+											1.0f,
+											1.0f,
+											0.0f,
+											360.0f,
+											0.0f,
+											360.0f,
+											0.0f,
+											360.0f
+									))
+									.color(new AnimatedSpringColor(
+											1.0f,
+											1.0f,
+											Color.BLUE,
+											Color.RED,
+											Color.GREEN,
+											new Color(255, 255, 255, 0)
+									))
+									.size(new AnimatedSpringFloat(1.0f,
+											1.0f,
+											0.0f,
+											1f,
+											1f,
+											0.0f))
+									.render(ActionCallPosition.PRE, (particle, tickProgress) -> {
+	//							double delta = ((double) particle.getAge() + tickProgress) / particle.getMaxAge();
+	//							Vec3d lerpedPos = particle.getStartPos().lerp(player.getPos(), delta);
+	//							particle.setPos(lerpedPos);
+										return false;
+									})
+									.disableNoClip()
+									.texture(CustomParticleTexture.TWINKLE)
+									.gravity(new AnimatedFloat(
+											Easing.EXPO_IN_OUT,
+											0.2f
+									))
+									.build()
+					).after(0).spawn();
+		});
 	}
 }

@@ -23,4 +23,8 @@ public class AnimatedSpringDouble extends AnimatedSpringNumber<Double> {
         copy.setLifetime(getLifetime());
         return copy;
     }
+
+    public static AnimatedValue<Double> of(Double val) {
+        return new AnimatedSpringDouble(0.8, 4.0, val);
+    }
 }

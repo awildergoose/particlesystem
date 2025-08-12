@@ -25,4 +25,8 @@ public class AnimatedFloat extends AnimatedNumber<Float> {
         copyInstance.setLifetime(getLifetime());
         return copyInstance;
     }
+
+    public static AnimatedValue<Float> of(Float val) {
+        return new AnimatedFloat(Easing.LINEAR, val);
+    }
 }

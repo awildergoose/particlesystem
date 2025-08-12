@@ -23,4 +23,8 @@ public class AnimatedSpringFloat extends AnimatedSpringNumber<Float> {
         copy.setLifetime(getLifetime());
         return copy;
     }
+
+    public static AnimatedValue<Float> of(Float val) {
+        return new AnimatedSpringFloat(0.8, 4.0, val);
+    }
 }
