@@ -2,23 +2,21 @@ package awildgoose.particlesystem.builder;
 
 import awildgoose.particlesystem.action.Action;
 import awildgoose.particlesystem.action.ActionCallPosition;
-import awildgoose.particlesystem.animated.AnimatedAngle;
-import awildgoose.particlesystem.animated.AnimatedColor;
-import awildgoose.particlesystem.animated.AnimatedFloat;
-import awildgoose.particlesystem.animated.AnimatedValue;
+import awildgoose.particlesystem.animated.*;
 import awildgoose.particlesystem.particle.CustomParticle;
 import awildgoose.particlesystem.provider.CustomParticleData;
 import awildgoose.particlesystem.provider.CustomParticleTexture;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.function.BiFunction;
 
 @SuppressWarnings("unused")
 public class CustomParticleDataBuilder {
-    private AnimatedFloat size = AnimatedFloat.ONE;
-    private AnimatedFloat angle = AnimatedFloat.ZERO;
-    private AnimatedColor color = AnimatedColor.WHITE;
-    private AnimatedFloat gravity = AnimatedFloat.ZERO;
+    private AnimatedNumber<Float> size = AnimatedFloat.ONE;
+    private AnimatedNumber<Float> angle = AnimatedFloat.ZERO;
+    private AnimatedValue<Color> color = AnimatedColor.WHITE;
+    private AnimatedNumber<Float> gravity = AnimatedFloat.ZERO;
     private CustomParticleTexture texture = CustomParticleTexture.WISP;
     private int lifetime = 20;
     private double velocityX = 0;
@@ -28,12 +26,12 @@ public class CustomParticleDataBuilder {
     private final ArrayList<Action> renderActions = new ArrayList<>();
     private final ArrayList<Action> tickActions = new ArrayList<>();
 
-    public CustomParticleDataBuilder size(AnimatedFloat size) {
+    public CustomParticleDataBuilder size(AnimatedNumber<Float> size) {
         this.size = resolveAnimatedValue(size);
         return this;
     }
 
-    public CustomParticleDataBuilder size(AnimatedFloat size, int duration) {
+    public CustomParticleDataBuilder size(AnimatedNumber<Float> size, int duration) {
         this.size = resolveAnimatedValue(size, duration);
         return this;
     }
@@ -48,22 +46,22 @@ public class CustomParticleDataBuilder {
         return this;
     }
 
-    public CustomParticleDataBuilder angle(AnimatedAngle angle) {
+    public CustomParticleDataBuilder angle(AnimatedNumber<Float> angle) {
         this.angle = resolveAnimatedValue(angle);
         return this;
     }
 
-    public CustomParticleDataBuilder angle(AnimatedAngle angle, int duration) {
+    public CustomParticleDataBuilder angle(AnimatedNumber<Float> angle, int duration) {
         this.angle = resolveAnimatedValue(angle, duration);
         return this;
     }
 
-    public CustomParticleDataBuilder color(AnimatedColor color) {
+    public CustomParticleDataBuilder color(AnimatedValue<Color> color) {
         this.color = resolveAnimatedValue(color);
         return this;
     }
 
-    public CustomParticleDataBuilder color(AnimatedColor color, int duration) {
+    public CustomParticleDataBuilder color(AnimatedValue<Color> color, int duration) {
         this.color = resolveAnimatedValue(color, duration);
         return this;
     }
@@ -75,7 +73,7 @@ public class CustomParticleDataBuilder {
         return this;
     }
 
-    public CustomParticleDataBuilder gravity(AnimatedFloat gravity) {
+    public CustomParticleDataBuilder gravity(AnimatedNumber<Float> gravity) {
         this.gravity = gravity;
         return this;
     }

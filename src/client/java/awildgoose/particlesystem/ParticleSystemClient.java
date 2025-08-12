@@ -1,13 +1,14 @@
 package awildgoose.particlesystem;
 
 import awildgoose.particlesystem.action.ActionCallPosition;
-import awildgoose.particlesystem.animated.AnimatedAngle;
-import awildgoose.particlesystem.animated.AnimatedColor;
 import awildgoose.particlesystem.animated.AnimatedFloat;
 import awildgoose.particlesystem.animated.Easing;
+import awildgoose.particlesystem.animated.spring.AnimatedSpringAngle;
+import awildgoose.particlesystem.animated.spring.AnimatedSpringColor;
+import awildgoose.particlesystem.animated.spring.AnimatedSpringFloat;
 import awildgoose.particlesystem.builder.CustomParticleBuilder;
-import awildgoose.particlesystem.particle.CustomParticle;
 import awildgoose.particlesystem.builder.CustomParticleDataBuilder;
+import awildgoose.particlesystem.particle.CustomParticle;
 import awildgoose.particlesystem.provider.CustomParticleTexture;
 import awildgoose.particlesystem.provider.Scheduler;
 import net.fabricmc.api.ClientModInitializer;
@@ -30,28 +31,38 @@ public class ParticleSystemClient implements ClientModInitializer {
 				.at(pos)
 				.with(
 						new CustomParticleDataBuilder()
-						.lifetime(40)
-						.angle(new AnimatedAngle(
-								Easing.EXPO_IN_OUT,
+						.lifetime(200)
+						.angle(new AnimatedSpringAngle(
+								1.0f,
+								1.0f,
 								0.0f,
+								360.0f,
+								0.0f,
+								360.0f,
 								0.0f,
 								360.0f
-						), 20)
-						.color(new AnimatedColor(
-								Easing.EXPO_IN_OUT,
+						))
+						.color(new AnimatedSpringColor(
+								1.0f,
+								1.0f,
 								Color.BLUE,
-								Color.WHITE,
-								Color.BLUE,
+								Color.RED,
+								Color.GREEN,
 								new Color(255, 255, 255, 0)
-						), 20)
-						.size(new AnimatedFloat(Easing.EXPO_IN_OUT, 0.0f, 0.5f, 0.5f, 0.0f))
+						))
+						.size(new AnimatedSpringFloat(1.0f,
+								1.0f,
+								0.0f,
+								0.5f,
+								0.5f,
+								0.0f))
 						.render(ActionCallPosition.PRE, (particle, tickProgress) -> {
 //							double delta = ((double) particle.getAge() + tickProgress) / particle.getMaxAge();
 //							Vec3d lerpedPos = particle.getStartPos().lerp(player.getPos(), delta);
 //							particle.setPos(lerpedPos);
 							return false;
 						})
-						.enableNoClip()
+						.disableNoClip()
 						.texture(CustomParticleTexture.TWINKLE)
 						.gravity(new AnimatedFloat(
 								Easing.EXPO_IN_OUT,
