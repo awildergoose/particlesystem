@@ -4,8 +4,6 @@ import awildgoose.particlesystem.ParticleSystem;
 import awildgoose.particlesystem.particle.CustomParticle;
 import awildgoose.particlesystem.provider.CustomParticleData;
 import awildgoose.particlesystem.provider.Scheduler;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -20,7 +18,6 @@ import java.util.function.Consumer;
  * }</pre>
  * @see CustomParticleDataBuilder
  */
-@Environment(EnvType.CLIENT)
 @SuppressWarnings("unused")
 public class CustomParticleBuilder {
     private CustomParticleData data = CustomParticleData.DEFAULT;

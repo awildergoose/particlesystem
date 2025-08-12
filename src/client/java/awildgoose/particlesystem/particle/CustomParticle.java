@@ -5,8 +5,6 @@ import awildgoose.particlesystem.action.ActionCallPosition;
 import awildgoose.particlesystem.animated.AnimatedFloat;
 import awildgoose.particlesystem.animated.Easing;
 import awildgoose.particlesystem.provider.CustomParticleData;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
@@ -18,7 +16,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 @SuppressWarnings("unused")
-@Environment(EnvType.CLIENT)
 public class CustomParticle extends AnimatedParticle {
     private CustomParticleData data;
     private final Vec3d startPos;
@@ -124,7 +121,6 @@ public class CustomParticle extends AnimatedParticle {
         return this.data;
     }
 
-    @Environment(EnvType.CLIENT)
     public static class Factory implements ParticleFactory<SimpleParticleType> {
         private final SpriteProvider spriteProvider;
 
