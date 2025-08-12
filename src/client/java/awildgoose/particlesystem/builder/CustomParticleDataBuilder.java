@@ -17,7 +17,7 @@ public class CustomParticleDataBuilder {
     private AnimatedNumber<Float> angle = AnimatedFloat.ZERO;
     private AnimatedValue<Color> color = AnimatedColor.WHITE;
     private AnimatedNumber<Float> gravity = AnimatedFloat.ZERO;
-    private CustomParticleTexture texture = CustomParticleTexture.WISP;
+    private int texture = CustomParticleTexture.WISP.asNum();
     private int lifetime = 20;
     private double velocityX = 0;
     private double velocityY = 0;
@@ -42,6 +42,11 @@ public class CustomParticleDataBuilder {
     }
 
     public CustomParticleDataBuilder texture(CustomParticleTexture texture) {
+        this.texture = texture.asNum();
+        return this;
+    }
+
+    public CustomParticleDataBuilder texture(int texture) {
         this.texture = texture;
         return this;
     }

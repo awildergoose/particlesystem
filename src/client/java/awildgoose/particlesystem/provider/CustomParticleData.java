@@ -9,13 +9,13 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class CustomParticleData {
-    public static final CustomParticleData DEFAULT = new CustomParticleData(AnimatedFloat.ONE, 20, CustomParticleTexture.WISP, AnimatedFloat.ZERO, AnimatedColor.WHITE, 0, 0, 0, AnimatedFloat.ZERO, true, new ArrayList<>(), new ArrayList<>());
+    public static final CustomParticleData DEFAULT = new CustomParticleData(AnimatedFloat.ONE, 20, CustomParticleTexture.WISP.asNum(), AnimatedFloat.ZERO, AnimatedColor.WHITE, 0, 0, 0, AnimatedFloat.ZERO, true, new ArrayList<>(), new ArrayList<>());
 
     public AnimatedValue<Float> size;
     public AnimatedValue<Float> angle;
     public AnimatedValue<Float> gravity;
     public AnimatedValue<Color> color;
-    public CustomParticleTexture texture;
+    public int texture;
     public int lifetime;
 
     public double velocityX;
@@ -28,7 +28,7 @@ public class CustomParticleData {
 
     public CustomParticleData(AnimatedValue<Float> size,
                               int lifetime,
-                              CustomParticleTexture texture,
+                              int texture,
                               AnimatedValue<Float> angle,
                               AnimatedValue<Color> color,
                               double velocityX,

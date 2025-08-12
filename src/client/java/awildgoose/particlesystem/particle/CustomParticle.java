@@ -5,7 +5,6 @@ import awildgoose.particlesystem.action.ActionCallPosition;
 import awildgoose.particlesystem.animated.AnimatedFloat;
 import awildgoose.particlesystem.animated.Easing;
 import awildgoose.particlesystem.provider.CustomParticleData;
-import awildgoose.particlesystem.provider.CustomParticleTexture;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
@@ -17,13 +16,14 @@ import net.minecraft.util.math.Vec3d;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class CustomParticle extends AnimatedParticle {
     private CustomParticleData data;
     private final Vec3d startPos;
+    private int lastSpriteIndex = -1;
+    public int frameCount = 8;
 
     CustomParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, spriteProvider, 0F);
@@ -55,27 +55,24 @@ public class CustomParticle extends AnimatedParticle {
         this.z = pos.z;
     }
 
-    public void setTexture(CustomParticleTexture texture) {
+    public void setTexture(int texture) {
         this.data.texture = texture;
     }
 
     public boolean callActions(ArrayList<Action> actions, ActionCallPosition position, float tickProgress) {
-        AtomicBoolean suppress = new AtomicBoolean(false);
-
-        actions.forEach((v) -> {
-            if (v.getPosition() == position)  {
-                if (v.run(this, tickProgress))
-                    suppress.set(true);
-            }
-        });
-
-        return suppress.get();
+        boolean suppress = false;
+        for (Action a : actions)
+            if (a.getPosition() == position && a.run(this, tickProgress))
+                suppress = true;
+        return suppress;
     }
 
     private void updateSprite() {
-        int totalFrames = 8;
-        int currentFrame = 1 + this.data.texture.asNum();
-        this.setSprite(spriteProvider.getSprite(currentFrame, totalFrames));
+        int spriteIndex = 1 + this.data.texture;
+        if (spriteIndex != lastSpriteIndex) {
+            this.setSprite(spriteProvider.getSprite(spriteIndex, this.frameCount));
+            lastSpriteIndex = spriteIndex;
+        }
     }
 
     private void applyData(float tickProgress) {

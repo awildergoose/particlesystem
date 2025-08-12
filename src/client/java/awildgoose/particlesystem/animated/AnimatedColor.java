@@ -2,6 +2,9 @@ package awildgoose.particlesystem.animated;
 
 import java.awt.Color;
 
+/**
+ * An eased color
+ */
 @SuppressWarnings("unused")
 public class AnimatedColor implements AnimatedValue<Color> {
     public static final AnimatedColor WHITE = new AnimatedColor(Easing.LINEAR, Color.WHITE);
@@ -10,6 +13,10 @@ public class AnimatedColor implements AnimatedValue<Color> {
     private int lifetime;
     private int age;
 
+    /**
+     * @param easing Type of easing
+     * @param inputColors The color values
+     */
     public AnimatedColor(Easing easing, Color... inputColors) {
         if (inputColors == null || inputColors.length == 0) {
             throw new IllegalArgumentException("Need at least one color");
