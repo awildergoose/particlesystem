@@ -135,6 +135,17 @@ public class CustomParticleDataBuilder {
     }
 
     public CustomParticleData build() {
-        return new CustomParticleData(size, lifetime, texture, angle, color, velocityX, velocityY, velocityZ, gravity, noClip, tickActions, renderActions);
+        return new CustomParticleData(size,
+                lifetime,
+                texture,
+                angle,
+                color,
+                velocityX,
+                velocityY,
+                velocityZ,
+                gravity,
+                noClip,
+                tickActions,
+                renderActions);
     }
 }

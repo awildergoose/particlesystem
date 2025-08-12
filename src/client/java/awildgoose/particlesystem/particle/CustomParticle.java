@@ -5,6 +5,7 @@ import awildgoose.particlesystem.action.ActionCallPosition;
 import awildgoose.particlesystem.animated.AnimatedFloat;
 import awildgoose.particlesystem.animated.Easing;
 import awildgoose.particlesystem.provider.CustomParticleData;
+import awildgoose.particlesystem.provider.CustomParticleTexture;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
@@ -52,6 +53,10 @@ public class CustomParticle extends AnimatedParticle {
         this.x = pos.x;
         this.y = pos.y;
         this.z = pos.z;
+    }
+
+    public void setTexture(CustomParticleTexture texture) {
+        this.data.texture = texture;
     }
 
     public boolean callActions(ArrayList<Action> actions, ActionCallPosition position, float tickProgress) {
@@ -121,6 +126,10 @@ public class CustomParticle extends AnimatedParticle {
     public void setData(CustomParticleData data) {
         this.data = data;
         this.applyData(0);
+    }
+
+    public CustomParticleData getData() {
+        return this.data;
     }
 
     @Environment(EnvType.CLIENT)

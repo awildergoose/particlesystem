@@ -26,7 +26,18 @@ public class CustomParticleData {
     public ArrayList<Action> tickActions;
     public ArrayList<Action> renderActions;
 
-    public CustomParticleData(AnimatedValue<Float> size, int lifetime, CustomParticleTexture texture, AnimatedValue<Float> angle, AnimatedValue<Color> color, double velocityX, double velocityY, double velocityZ, AnimatedValue<Float> gravity, boolean noClip, ArrayList<Action> tickActions, ArrayList<Action> renderActions) {
+    public CustomParticleData(AnimatedValue<Float> size,
+                              int lifetime,
+                              CustomParticleTexture texture,
+                              AnimatedValue<Float> angle,
+                              AnimatedValue<Color> color,
+                              double velocityX,
+                              double velocityY,
+                              double velocityZ,
+                              AnimatedValue<Float> gravity,
+                              boolean noClip,
+                              ArrayList<Action> tickActions,
+                              ArrayList<Action> renderActions) {
         this.size = size;
         this.lifetime = lifetime;
         this.texture = texture;
