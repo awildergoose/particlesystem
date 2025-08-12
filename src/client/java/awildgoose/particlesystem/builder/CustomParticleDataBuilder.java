@@ -11,6 +11,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.function.BiFunction;
 
+/**
+ * Used to create data for custom particles, like {@link #color}, {@link #angle}, and {@link #lifetime} and so on
+ */
 @SuppressWarnings("unused")
 public class CustomParticleDataBuilder {
     private AnimatedNumber<Float> size = AnimatedFloat.ONE;

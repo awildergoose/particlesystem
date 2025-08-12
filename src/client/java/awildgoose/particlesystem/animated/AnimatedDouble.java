@@ -6,6 +6,7 @@ package awildgoose.particlesystem.animated;
  */
 @SuppressWarnings("unused")
 public class AnimatedDouble extends AnimatedNumber<Double> {
+    public static final AnimatedDouble ZERO = new AnimatedDouble(Easing.LINEAR, 0.0);
     public static final AnimatedDouble ONE = new AnimatedDouble(Easing.LINEAR, 1.0);
 
     public AnimatedDouble(Easing easing, double... values) {

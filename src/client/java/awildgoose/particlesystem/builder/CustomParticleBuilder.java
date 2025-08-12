@@ -13,6 +13,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
+/**
+ * Used to create particles and spawn them into the world
+ * <pre>{@code
+ *     new CustomParticleBuilder().at(0, 0, 0).with(new CustomParticleDataBuilder().build()).spawn();
+ * }</pre>
+ * @see CustomParticleDataBuilder
+ */
 @Environment(EnvType.CLIENT)
 @SuppressWarnings("unused")
 public class CustomParticleBuilder {

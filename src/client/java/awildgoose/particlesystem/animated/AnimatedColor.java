@@ -9,6 +9,7 @@ import java.awt.Color;
 @SuppressWarnings("unused")
 public class AnimatedColor implements AnimatedValue<Color> {
     public static final AnimatedColor WHITE = new AnimatedColor(Easing.LINEAR, Color.WHITE);
+    public static final AnimatedColor BLACK = new AnimatedColor(Easing.LINEAR, Color.BLACK);
     private final Color[] colors;
     private final Easing easing;
     private int lifetime;

@@ -6,6 +6,7 @@ package awildgoose.particlesystem.animated;
  */
 @SuppressWarnings("unused")
 public class AnimatedInt extends AnimatedNumber<Integer> {
+    public static final AnimatedInt ZERO = new AnimatedInt(Easing.LINEAR, 0.0);
     public static final AnimatedInt ONE = new AnimatedInt(Easing.LINEAR, 1.0);
 
     public AnimatedInt(Easing easing, double... values) {
