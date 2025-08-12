@@ -1,5 +1,10 @@
 package awildgoose.particlesystem.animated;
 
+/**
+ * An animated number using Easing
+ * @param <T> Type of object to animate
+ * @see AnimatedValue
+ */
 public abstract class AnimatedNumber<T extends Number> implements AnimatedValue<T> {
     protected final double[] values;
     protected final Easing easing;

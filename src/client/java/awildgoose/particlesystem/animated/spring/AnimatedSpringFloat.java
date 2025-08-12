@@ -2,6 +2,10 @@ package awildgoose.particlesystem.animated.spring;
 
 import awildgoose.particlesystem.animated.AnimatedValue;
 
+/**
+ * An animated float using springs
+ * @see awildgoose.particlesystem.animated.spring.AnimatedSpringNumber
+ */
 @SuppressWarnings("unused")
 public class AnimatedSpringFloat extends AnimatedSpringNumber<Float> {
     public AnimatedSpringFloat(double damping, double frequency, double... values) {

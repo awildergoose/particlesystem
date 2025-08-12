@@ -1,5 +1,9 @@
 package awildgoose.particlesystem.animated;
 
+/**
+ * An animated float
+ * @see AnimatedNumber
+ */
 @SuppressWarnings("unused")
 public class AnimatedFloat extends AnimatedNumber<Float> {
     public static final AnimatedFloat ZERO = new AnimatedFloat(Easing.LINEAR, 0.0);

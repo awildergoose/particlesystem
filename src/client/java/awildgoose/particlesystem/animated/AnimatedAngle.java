@@ -2,6 +2,7 @@ package awildgoose.particlesystem.animated;
 
 /**
  * An animated float that converts all values to radians
+ * @see AnimatedNumber
  */
 @SuppressWarnings("unused")
 public class AnimatedAngle extends AnimatedFloat {

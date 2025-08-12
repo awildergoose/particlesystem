@@ -1,5 +1,9 @@
 package awildgoose.particlesystem.animated;
 
+/**
+ * An animated int
+ * @see AnimatedNumber
+ */
 @SuppressWarnings("unused")
 public class AnimatedInt extends AnimatedNumber<Integer> {
     public static final AnimatedInt ONE = new AnimatedInt(Easing.LINEAR, 1.0);

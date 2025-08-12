@@ -2,6 +2,9 @@ package awildgoose.particlesystem.animated;
 
 import java.util.function.DoubleUnaryOperator;
 
+/**
+ * Easing functions, see <a href="https://www.easings.net">this</a> to learn more about easing functions
+ */
 @SuppressWarnings("unused")
 public enum Easing {
     LINEAR(t -> t),

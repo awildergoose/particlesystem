@@ -2,6 +2,10 @@ package awildgoose.particlesystem.animated.spring;
 
 import awildgoose.particlesystem.animated.AnimatedValue;
 
+/**
+ * An animated double using springs
+ * @see awildgoose.particlesystem.animated.spring.AnimatedSpringNumber
+ */
 @SuppressWarnings("unused")
 public class AnimatedSpringDouble extends AnimatedSpringNumber<Double> {
     public AnimatedSpringDouble(double damping, double frequency, double... values) {

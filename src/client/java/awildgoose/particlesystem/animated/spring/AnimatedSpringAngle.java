@@ -2,6 +2,12 @@ package awildgoose.particlesystem.animated.spring;
 
 import awildgoose.particlesystem.animated.AnimatedValue;
 
+/**
+ * An animated angle using springs
+ * @see awildgoose.particlesystem.animated.spring.AnimatedSpringFloat
+ * @see awildgoose.particlesystem.animated.spring.AnimatedSpringNumber
+ * @see awildgoose.particlesystem.animated.AnimatedAngle
+ */
 @SuppressWarnings("unused")
 public class AnimatedSpringAngle extends AnimatedSpringFloat {
     public AnimatedSpringAngle(double damping, double frequency, double... degrees) {

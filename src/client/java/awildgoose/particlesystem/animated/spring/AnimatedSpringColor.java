@@ -4,6 +4,11 @@ import awildgoose.particlesystem.animated.AnimatedValue;
 
 import java.awt.Color;
 
+/**
+ * An animated color using springs
+ * @see awildgoose.particlesystem.animated.AnimatedColor
+ * @see awildgoose.particlesystem.animated.spring.AnimatedSpringNumber
+ */
 @SuppressWarnings("unused")
 public class AnimatedSpringColor implements AnimatedValue<Color> {
     private final Color[] colors;

@@ -3,6 +3,11 @@ package awildgoose.particlesystem.animated.spring;
 import awildgoose.particlesystem.animated.AnimatedNumber;
 import awildgoose.particlesystem.animated.Easing;
 
+/**
+ * An animated number using springs instead of easing functions, see <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">this</a> to learn more about springs
+ * @param <T> Type of object to animate using springs
+ * @see AnimatedNumber
+ */
 @SuppressWarnings("unused")
 public abstract class AnimatedSpringNumber<T extends Number> extends AnimatedNumber<T> {
     protected final double damping;

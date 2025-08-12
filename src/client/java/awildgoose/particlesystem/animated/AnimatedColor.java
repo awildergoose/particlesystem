@@ -3,7 +3,8 @@ package awildgoose.particlesystem.animated;
 import java.awt.Color;
 
 /**
- * An eased color
+ * An animated color
+ * @see AnimatedValue
  */
 @SuppressWarnings("unused")
 public class AnimatedColor implements AnimatedValue<Color> {
